@@ -4,11 +4,16 @@ const SearchBar = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    const delayDebounce = setTimeout(() => {
-      onSearch(searchTerm);
-    }, 500); // Debounce
+    // Set debounce timeout (500ms)
+    const debounceTimer = setTimeout(() => {
+      // Only trigger search if query length is sufficient
+      if (searchTerm.trim().length >= 2) {
+        onSearch(searchTerm);
+      }
+    }, 500);
 
-    return () => clearTimeout(delayDebounce);
+    // Cleanup timeout on input change
+    return () => clearTimeout(debounceTimer);
   }, [searchTerm, onSearch]);
 
   return (
@@ -17,7 +22,7 @@ const SearchBar = ({ onSearch }) => {
       placeholder="🔍 Search problems..."
       value={searchTerm}
       onChange={(e) => setSearchTerm(e.target.value)}
-      className="border p-2 w-full mt-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+      className="border p-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
     />
   );
 };

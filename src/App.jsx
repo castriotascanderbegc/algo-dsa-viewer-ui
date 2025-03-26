@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import axios from "axios";
 import SearchBar from "./components/SearchBar";
 import FilterDropdown from "./components/FilterDropDown";
@@ -15,7 +15,7 @@ const App = () => {
   const backendURL = "http://localhost:8000";
 
   // Search Handler with Error & Loading
-  const handleSearch = async (query) => {
+  const handleSearch = useCallback(async (query) => {
     if (!query || query.length < 2) {
       setFiles([]);
       return;
@@ -37,7 +37,7 @@ const App = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [backendURL]);
   
   // Filter Handler
   const handleFilter = async (structure) => {
