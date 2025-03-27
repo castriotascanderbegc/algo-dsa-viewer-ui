@@ -7,6 +7,11 @@ body {
     background-color: white;
     color: black;
     transition: background-color 300ms, color 300ms;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+html, body {
+    scroll-behavior: smooth;
 }
 
 .dark body {
@@ -14,9 +19,15 @@ body {
     color: white;
 }
 
+/* Dark mode input text fix */
+.dark input {
+    color: white !important;
+}
+
 /* Ensure the root div takes full height */
 #root {
     min-height: 100vh;
+    position: relative;
 }
 
 /* Style for code blocks in dark mode */
@@ -36,6 +47,21 @@ body {
     top: 16px;
     right: 16px;
     z-index: 1000;
+}
+
+/* Fix for positioning of toast components */
+#toast-container {
+    position: fixed !important;
+    top: 0;
+    left: 0; /* Position on left */
+    z-index: 1050;
+    padding: 1rem;
+    pointer-events: none;
+}
+
+.toast-content {
+    position: fixed !important;
+    z-index: 1050;
 }
 
 /* Syntax highlighting enhancements for dark mode */
