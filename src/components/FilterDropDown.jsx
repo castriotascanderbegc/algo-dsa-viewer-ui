@@ -15,7 +15,7 @@ const FilterDropDown = ({ onFilter }) => {
   return (
     <select
       onChange={(e) => onFilter(e.target.value)}
-      className="border p-2 w-full mt-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+      className="border p-2 w-full mt-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-200"
     >
       <option value="">📁 Filter by Data Structure</option>
       {dataStructures.map((ds) => (

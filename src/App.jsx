@@ -4,6 +4,8 @@ import SearchBar from "./components/SearchBar";
 import FilterDropdown from "./components/FilterDropDown";
 import FileList from "./components/FileList";
 import CodeViewer from "./components/CodeViewer";
+import DarkModeToggle from "./components/DarkModeToggle";
+import useDarkMode from './hooks/useDarkMode';
 
 const App = () => {
   const [files, setFiles] = useState([]);
@@ -11,6 +13,11 @@ const App = () => {
   const [loading, setLoading] = useState(false);
   const [fileLoading, setFileLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  // 1) Use the custom hook here
+  const [darkMode, toggleDarkMode] = useDarkMode();
+
+  console.log('Dark Mode in App.jsx is', darkMode); // This should now update
 
   const backendURL = "http://localhost:8000";
 
@@ -81,30 +88,44 @@ const App = () => {
   const clearFiles = () => setFiles([]);
 
   return (
-    <div className="p-8 max-w-[90%] mx-auto">
-      <h1 className="text-3xl font-bold text-center mb-6">
-        📂 DSA Problem Viewer
-      </h1>
+    <div className="p-8 min-h-screen relative" style={{
+      backgroundColor: darkMode ? '#1a202c' : 'white',
+      color: darkMode ? 'white' : 'black',
+      transition: 'background-color 300ms, color 300ms'
+    }}> 
+      {/* Pass darkMode & toggleDarkMode as props */}
+      <DarkModeToggle darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+      
+      {/* Main content container with consistent width for UI controls */}
+      <div className="max-w-[770px] mx-auto">
+        <h1 className="text-3xl font-bold text-center mb-6" style={{
+          color: darkMode ? 'white' : 'black'
+        }}>
+          📂 DSA Problem Viewer
+        </h1>
 
-      {/* Search Bar */}
-      <SearchBar onSearch={handleSearch} />
+        {/* Search Bar */}
+        <SearchBar onSearch={handleSearch} />
 
-      {/* Filter Dropdown */}
-      <FilterDropdown onFilter={handleFilter} />
+        {/* Filter Dropdown */}
+        <FilterDropdown onFilter={handleFilter} />
 
-      {/* Error Message */}
-      {error && <p className="text-red-500 mt-4">{error}</p>}
+        {/* Error Message */}
+        {error && <p className="text-red-500 mt-4">{error}</p>}
 
-      {/* Loading Spinner */}
-      {loading && <p className="text-blue-500 mt-4">Loading...</p>}
+        {/* Loading Spinner */}
+        {loading && <p className="text-blue-500 mt-4">Loading...</p>}
 
-      {/* File List */}
-      {!loading && files.length > 0 && (
-        <FileList files={files} onSelect={handleFileSelect} clearFiles={clearFiles} />
-      )}
+        {/* File List */}
+        {!loading && files.length > 0 && (
+          <FileList files={files} onSelect={handleFileSelect} clearFiles={clearFiles} />
+        )}
 
-      {/* File Content Viewer */}
-      {fileLoading && <p className="text-blue-500 mt-4">Loading file...</p>}
+        {/* File loading state */}
+        {fileLoading && <p className="text-blue-500 mt-4">Loading file...</p>}
+      </div>
+      
+      {/* Code Viewer - Placed outside the container to allow wider width */}
       {selectedFile && !fileLoading && <CodeViewer file={selectedFile} />}
     </div>
   );

@@ -22,7 +22,7 @@ const SearchBar = ({ onSearch }) => {
       placeholder="🔍 Search problems..."
       value={searchTerm}
       onChange={(e) => setSearchTerm(e.target.value)}
-      className="border p-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+      className="border p-2 w-full rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-gray-200"
     />
   );
 };

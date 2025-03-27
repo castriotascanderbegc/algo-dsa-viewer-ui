@@ -1,1 +1,60 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global styling */
+body {
+    background-color: white;
+    color: black;
+    transition: background-color 300ms, color 300ms;
+}
+
+.dark body {
+    background-color: #1a202c; /* Dark blue shade */
+    color: white;
+}
+
+/* Ensure the root div takes full height */
+#root {
+    min-height: 100vh;
+}
+
+/* Style for code blocks in dark mode */
+.dark pre, .dark code {
+    background-color: #171e2e; /* Darker background for code blocks */
+    color: #e2e8f0; /* Light gray text for code blocks */
+}
+
+/* Override specific highlighting styles */
+.dark .react-syntax-highlighter-line-number {
+    opacity: 0.6;
+}
+
+/* Fix for positioning of toggle button */
+.dark-mode-toggle {
+    position: fixed !important;
+    top: 16px;
+    right: 16px;
+    z-index: 1000;
+}
+
+/* Syntax highlighting enhancements for dark mode */
+.dark .hljs-keyword {
+    color: #7dd3fc; /* Light blue for keywords */
+}
+
+.dark .hljs-string {
+    color: #86efac; /* Light green for strings */
+}
+
+.dark .hljs-comment {
+    color: #94a3b8; /* Gray blue for comments */
+}
+
+.dark .hljs-function, .dark .hljs-title {
+    color: #c084fc; /* Light purple for functions */
+}
+
+.dark .hljs-number {
+    color: #fdba74; /* Light orange for numbers */
+}
