@@ -52,27 +52,27 @@ const CodeViewerContent = ({ file, onBackToSearch }) => {
   };
   
   return (
-    <div className="bg-white dark:bg-neutral-800 rounded-xl shadow-lg border-2 border-neutral-200 dark:border-neutral-700 max-w-5xl mx-auto overflow-hidden">
-      <div className="p-5 border-b-2 border-neutral-200 dark:border-neutral-700 flex items-center justify-between bg-neutral-50 dark:bg-neutral-800/80">
-        <div className="flex items-center">
+    <div className="bg-white/80 dark:bg-neutral-800/80 backdrop-blur-md rounded-2xl shadow-xl border border-neutral-200 dark:border-neutral-700 overflow-hidden">
+      <div className="p-6 border-b border-neutral-200 dark:border-neutral-700 flex items-center justify-between bg-white/50 dark:bg-neutral-800/50">
+        <div className="flex items-center gap-4">
           {onBackToSearch && (
             <button 
               onClick={onBackToSearch}
-              className="p-2 mr-3 text-neutral-600 hover:text-neutral-800 dark:text-neutral-400 dark:hover:text-white rounded-lg hover:bg-neutral-200/70 dark:hover:bg-neutral-700/80 transition-colors shadow-sm"
+              className="p-2 text-neutral-600 hover:text-neutral-800 dark:text-neutral-400 dark:hover:text-white rounded-xl hover:bg-neutral-100 dark:hover:bg-neutral-700/50 transition-all duration-200"
               aria-label="Back to search"
             >
               <RiArrowLeftLine className="text-2xl" />
             </button>
           )}
-          <div className="flex items-center">
-            <div className="bg-primary-50 dark:bg-primary-900/20 p-2 rounded-lg mr-3 shadow-sm">
+          <div className="flex items-center gap-4">
+            <div className="bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-900/20 dark:to-primary-800/20 p-2.5 rounded-xl shadow-sm">
               <RiCodeSSlashFill className="text-primary-500 text-2xl" />
             </div>
             <div>
-              <h2 className="text-lg font-semibold text-neutral-900 dark:text-white">
+              <h2 className="text-xl font-bold text-neutral-900 dark:text-white">
                 {file?.name}
               </h2>
-              <p className="text-sm text-neutral-500 dark:text-neutral-400">
+              <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">
                 Python Solution
               </p>
             </div>
@@ -80,10 +80,20 @@ const CodeViewerContent = ({ file, onBackToSearch }) => {
         </div>
         <button 
           onClick={copyToClipboard}
-          className="p-2 text-neutral-600 hover:text-neutral-800 dark:text-neutral-400 dark:hover:text-white rounded-lg hover:bg-neutral-200/70 dark:hover:bg-neutral-700/80 transition-colors shadow-sm"
+          className="flex items-center gap-2 px-4 py-2 text-neutral-600 hover:text-neutral-800 dark:text-neutral-400 dark:hover:text-white rounded-xl hover:bg-neutral-100 dark:hover:bg-neutral-700/50 transition-all duration-200"
           aria-label="Copy to clipboard"
         >
-          {copied ? <RiCheckLine className="text-success-500 text-2xl" /> : <RiFileCopyLine className="text-2xl" />}
+          {copied ? (
+            <>
+              <RiCheckLine className="text-success-500 text-xl" />
+              <span className="text-sm font-medium">Copied!</span>
+            </>
+          ) : (
+            <>
+              <RiFileCopyLine className="text-xl" />
+              <span className="text-sm font-medium">Copy Code</span>
+            </>
+          )}
         </button>
       </div>
       
@@ -93,7 +103,7 @@ const CodeViewerContent = ({ file, onBackToSearch }) => {
           style={codeStyle}
           customStyle={{ 
             margin: 0,
-            padding: '1.5rem',
+            padding: '2rem',
             background: darkMode ? '#1a1e2b' : '#f9fafb',
             fontFamily: "'JetBrains Mono', 'Menlo', 'Monaco', 'Courier New', monospace",
             fontSize: "14px",
@@ -103,10 +113,10 @@ const CodeViewerContent = ({ file, onBackToSearch }) => {
           showLineNumbers={true}
           lineNumberStyle={{
             textAlign: 'right',
-            paddingRight: '1em',
+            paddingRight: '1.5em',
             color: darkMode ? '#6b7280' : '#9ca3af',
             borderRight: darkMode ? '1px solid #374151' : '1px solid #e5e7eb',
-            marginRight: '1em',
+            marginRight: '1.5em',
             fontFamily: "'JetBrains Mono', monospace",
             fontWeight: 400,
             fontSize: "13px",

@@ -25,20 +25,20 @@ const SearchBar = ({ onSearch }) => {
   }, [searchTerm, onSearch]);
 
   return (
-    <div className="relative mb-6">
-      {/* Create a flex container for better layout control */}
+    <div className="relative">
       <div className={`
-        flex items-center
-        shadow-md border-2 border-neutral-200 dark:border-neutral-700
-        rounded-xl bg-white dark:bg-neutral-800
-        ${isFocused ? 'shadow-lg ring-2 ring-primary-500/30 border-primary-300 dark:border-primary-700' : ''}
-        transition-all duration-300
+        group relative flex items-center
+        shadow-lg border-2 border-neutral-200 dark:border-neutral-700
+        rounded-2xl bg-white dark:bg-neutral-800
+        ${isFocused ? 'shadow-xl ring-2 ring-primary-500/30 border-primary-300 dark:border-primary-700' : ''}
+        transition-all duration-300 ease-in-out
+        hover:shadow-xl hover:border-primary-300 dark:hover:border-primary-700
       `}>
         {/* Icon container with fixed width */}
         <div className={`
           flex-shrink-0 w-16 flex justify-center items-center 
           transition-colors duration-200
-          ${isFocused ? 'text-primary-500' : 'text-neutral-500 dark:text-neutral-400'}
+          ${isFocused ? 'text-primary-500' : 'text-neutral-500 dark:text-neutral-400 group-hover:text-primary-500'}
         `}>
           <RiSearchLine className="text-2xl" />
         </div>
@@ -46,7 +46,7 @@ const SearchBar = ({ onSearch }) => {
         {/* Input field */}
         <input
           type="text"
-          placeholder="Search problems..."
+          placeholder="Search for data structures and algorithms..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           onFocus={() => setIsFocused(true)}
@@ -55,9 +55,10 @@ const SearchBar = ({ onSearch }) => {
             flex-grow py-6 pr-14 
             text-lg font-medium
             bg-transparent
-            text-neutral-800
-            placeholder:text-neutral-400 dark:placeholder:text-neutral-300
+            text-neutral-800 dark:text-white
+            placeholder:text-neutral-400 dark:placeholder:text-neutral-500
             focus:outline-none
+            transition-colors duration-200
           `}
           aria-label="Search problems"
         />

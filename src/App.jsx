@@ -148,6 +148,15 @@ const App = () => {
       <main className="container mx-auto px-4 py-10 md:py-12">
         <div className="max-w-2xl mx-auto">
           <div className="bg-white dark:bg-neutral-800 rounded-xl shadow-card p-6 mb-8">
+            <div className="text-center mb-8">
+              <h2 className="text-2xl md:text-3xl font-bold text-neutral-900 dark:text-white mb-2">
+                Find Your Next DSA Problem
+              </h2>
+              <p className="text-neutral-600 dark:text-neutral-400">
+                Search through our collection of data structure and algorithm problems
+              </p>
+            </div>
+            
             <SearchBar onSearch={handleSearch} />
             <FilterDropdown ref={filterDropdownRef} onFilter={handleFilter} />
             
