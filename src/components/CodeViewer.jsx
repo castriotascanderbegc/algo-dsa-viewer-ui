@@ -4,6 +4,7 @@ import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import { a11yDark } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import useDarkMode from '../hooks/useDarkMode';
 import { RiCodeSSlashFill, RiFileCopyLine, RiCheckLine, RiArrowLeftLine } from "react-icons/ri";
+import ChatBot from './ChatBot';
 
 // Use a completely fresh approach with a wrapper and an inner component
 const CodeViewer = ({ file, onBackToSearch }) => {
@@ -135,6 +136,10 @@ const CodeViewerContent = ({ file, onBackToSearch }) => {
           {file?.content || ""}
         </SyntaxHighlighter>
       </div>
+      {/* ChatBot integrated into a Footer */}
+      <footer className="mt-8 pt-4 border-t dark:border-gray-700">
+        <ChatBot code={file?.content || ""} />
+      </footer>
     </div>
   );
 };
